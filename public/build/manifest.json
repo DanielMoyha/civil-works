@@ -1,0 +1,34 @@
+{
+  "resources/fonts/fontawesome/fa-regular-400.woff2": {
+    "file": "assets/fa-regular-400.fe69d948.woff2",
+    "src": "resources/fonts/fontawesome/fa-regular-400.woff2"
+  },
+  "resources/fonts/fontawesome/fa-brands-400.woff2": {
+    "file": "assets/fa-brands-400.c61287c2.woff2",
+    "src": "resources/fonts/fontawesome/fa-brands-400.woff2"
+  },
+  "resources/fonts/fontawesome/fa-solid-900.woff2": {
+    "file": "assets/fa-solid-900.8f06540f.woff2",
+    "src": "resources/fonts/fontawesome/fa-solid-900.woff2"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app.32b43a07.js",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/main.js": {
+    "file": "assets/main.c1054c21.js",
+    "src": "resources/js/main.js",
+    "isEntry": true
+  },
+  "resources/css/app.css": {
+    "file": "assets/app.9d60bd62.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/main.css": {
+    "file": "assets/main.a7313fda.css",
+    "src": "resources/css/main.css",
+    "isEntry": true
+  }
+}
