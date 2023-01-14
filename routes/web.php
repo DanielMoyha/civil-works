@@ -25,7 +25,7 @@ Route::group(['middleware' => ['prevent-back-button', 'auth', 'verified', 'permi
     Route::get('/construction/assignments', [DashboardController::class, 'constructionAssignments']);
 });
 Route::post('/works/export-excel', [WorkController::class, 'exportExcel'])->name('admin.works.download.excel');
-Route::group(['middleware' => ['prevent-back-button', 'auth', 'verified', 'permission:all.managerial']], function() {
+Route::group(['middleware' => ['auth', 'verified', 'permission:all.managerial']], function() {
     Route::get('/dashboard/works', [DashboardController::class, 'works'])->name('dashboard.works');
     Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])->names('admin.users');
     Route::get('users/{user}/editRole', [UserController::class, 'editRole'])->name('admin.users.editRole');
