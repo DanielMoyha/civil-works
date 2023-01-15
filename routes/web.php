@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    Artisan::call('optimize:clear');
     return view('auth.login');
 })->name('refresh');
 
@@ -26,6 +25,7 @@ Route::group(['middleware' => ['prevent-back-button', 'auth', 'verified', 'permi
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/construction/assignments', [DashboardController::class, 'constructionAssignments']);
 });
+Route::get('/works', [WorkController::class, 'index'])->name('admin.works.index');
 Route::post('/works/export-excel', [WorkController::class, 'exportExcel'])->name('admin.works.download.excel');
 Route::group(['middleware' => ['auth', 'verified', 'permission:all.managerial']], function() {
     Route::get('/dashboard/works', [DashboardController::class, 'works'])->name('dashboard.works');
@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth', 'verified', 'permission:all.managerial']]
     Route::get('states', [StateController::class, 'index'])->name('states.index');
 
     //works ADMIN
-    Route::get('/works', [WorkController::class, 'index'])->name('admin.works.index');
+    // Route::get('/works', [WorkController::class, 'index'])->name('admin.works.index');
     // Route::post('/works/export-excel', [WorkController::class, 'exportExcel'])->name('admin.works.download.excel');
     Route::get('/works/create', [WorkController::class, 'create'])->name('admin.works.create');
     Route::post('/works', [WorkController::class, 'store'])->name('admin.works.store');
