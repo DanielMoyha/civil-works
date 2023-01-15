@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
+    Artisan::call('optimize:clear');
     return view('auth.login');
 })->name('refresh');
 
@@ -97,9 +98,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/route-cache', function() {
-	Artisan::call('route:cache');
+/* Route::get('/route-cache', function() {
+	Artisan::call('optimize:clear');
     return 'Routes cache has been cleared';
-});
+}); */
 
 require __DIR__.'/auth.php';
