@@ -53,7 +53,9 @@ Route::group(['middleware' => ['auth', 'verified', 'permission:all.managerial']]
     //supervision ADMIN
     Route::get('/supervisions', [SupervisionController::class, 'index'])->name('admin.supervision.index');
 });
-/***  ÁREA CONSTRUCCIÓN  */
+
+
+/**  ÁREA CONSTRUCCIÓN  */
 Route::group(['middleware' => ['prevent-back-button', 'auth', 'verified', 'permission:all.construction']], function() {
     Route::get('/c-assignments', [ConstructionController::class, 'c_assignments'])->name('construction.assignments');
     Route::get('/c-assignments/{construction}', [ConstructionController::class, 'show_assignment'])->name('construction.assignments.show');
