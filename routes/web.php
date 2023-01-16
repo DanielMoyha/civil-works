@@ -53,7 +53,6 @@ Route::group(['middleware' => ['auth', 'verified', 'permission:all.managerial']]
     //supervision ADMIN
     Route::get('/supervisions', [SupervisionController::class, 'index'])->name('admin.supervision.index');
 });
-
 /***  ÁREA CONSTRUCCIÓN  */
 Route::group(['middleware' => ['prevent-back-button', 'auth', 'verified', 'permission:all.construction']], function() {
     Route::get('/c-assignments', [ConstructionController::class, 'c_assignments'])->name('construction.assignments');
@@ -62,8 +61,7 @@ Route::group(['middleware' => ['prevent-back-button', 'auth', 'verified', 'permi
     Route::get('/c-materials/{construction}', [ConstructionController::class, 'c_materials_construction'])->name('construction.materials');
     Route::put('/c-materials/{construction}', [ConstructionController::class, 'update_materials_construction'])->name('construction.materials.update');
 });
-/***  END CONSTRUCCIÓN  */
-
+/***  END CONSTRUCCIÓN  ***/
 /***  ÁREA ESTUDIOS  */
 Route::group(['middleware' => ['prevent-back-button', 'auth', 'verified', 'permission:all.study']], function() {
     Route::get('/e-assignments', [StudyController::class, 'e_assignments'])->name('study.assignments');
