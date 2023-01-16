@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
+    Artisan::call('optimize:clear');
     return view('auth.login');
 })->name('refresh');
 
@@ -25,33 +26,32 @@ Route::group(['middleware' => ['prevent-back-button', 'auth', 'verified', 'permi
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/construction/assignments', [DashboardController::class, 'constructionAssignments']);
 });
-Route::get('/works', [WorkController::class, 'index'])->name('admin.works.index');
 Route::post('/works/export-excel', [WorkController::class, 'exportExcel'])->name('admin.works.download.excel');
-Route::group(['middleware' => ['auth', 'verified', 'permission:all.managerial']], function() {
-    Route::get('/dashboard/works', [DashboardController::class, 'works'])->name('dashboard.works');
-    Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])->names('admin.users');
-    Route::get('users/{user}/editRole', [UserController::class, 'editRole'])->name('admin.users.editRole');
-    Route::put('users/{user}/role', [UserController::class, 'updateRole'])->name('admin.users.updateRole');
-    Route::resource('roles', RoleController::class)->names('admin.roles');
-    Route::get('cities', [CityController::class, 'index'])->name('cities.index');
-    Route::get('states', [StateController::class, 'index'])->name('states.index');
+Route::get('/dashboard/works', [DashboardController::class, 'works'])->name('dashboard.works');
+Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])->names('admin.users');
+Route::get('users/{user}/editRole', [UserController::class, 'editRole'])->name('admin.users.editRole');
+Route::put('users/{user}/role', [UserController::class, 'updateRole'])->name('admin.users.updateRole');
+Route::resource('roles', RoleController::class)->names('admin.roles');
+Route::get('cities', [CityController::class, 'index'])->name('cities.index');
+Route::get('states', [StateController::class, 'index'])->name('states.index');
 
-    //works ADMIN
-    // Route::get('/works', [WorkController::class, 'index'])->name('admin.works.index');
-    // Route::post('/works/export-excel', [WorkController::class, 'exportExcel'])->name('admin.works.download.excel');
-    Route::get('/works/create', [WorkController::class, 'create'])->name('admin.works.create');
-    Route::post('/works', [WorkController::class, 'store'])->name('admin.works.store');
-    Route::get('/works/{work}/edit', [WorkController::class, 'edit'])->name('admin.works.edit');
-    Route::put('/works/{work}', [WorkController::class, 'update'])->name('admin.works.update');
-    Route::get('/works/{work}/show', [WorkController::class, 'show'])->name('admin.works.show');
-    //services ADMIN
-    Route::get('/services', [ServiceController::class, 'index'])->name('admin.services.index');
-    //construction ADMIN
-    Route::get('/constructions', [ConstructionController::class, 'index'])->name('admin.construction.index');
-    //studies ADMIN
-    Route::get('/studies', [StudyController::class, 'index'])->name('admin.study.index');
-    //supervision ADMIN
-    Route::get('/supervisions', [SupervisionController::class, 'index'])->name('admin.supervision.index');
+//works ADMIN
+Route::get('/works', [WorkController::class, 'index'])->name('admin.works.index');
+// Route::post('/works/export-excel', [WorkController::class, 'exportExcel'])->name('admin.works.download.excel');
+Route::get('/works/create', [WorkController::class, 'create'])->name('admin.works.create');
+Route::post('/works', [WorkController::class, 'store'])->name('admin.works.store');
+Route::get('/works/{work}/edit', [WorkController::class, 'edit'])->name('admin.works.edit');
+Route::put('/works/{work}', [WorkController::class, 'update'])->name('admin.works.update');
+Route::get('/works/{work}/show', [WorkController::class, 'show'])->name('admin.works.show');
+//services ADMIN
+Route::get('/services', [ServiceController::class, 'index'])->name('admin.services.index');
+//construction ADMIN
+Route::get('/constructions', [ConstructionController::class, 'index'])->name('admin.construction.index');
+//studies ADMIN
+Route::get('/studies', [StudyController::class, 'index'])->name('admin.study.index');
+//supervision ADMIN
+Route::get('/supervisions', [SupervisionController::class, 'index'])->name('admin.supervision.index');
+Route::group(['middleware' => ['auth', 'verified', 'permission:all.managerial']], function() {
 });
 
 /***  ÁREA CONSTRUCCIÓN  */
