@@ -1,5 +1,6 @@
 <div>
     <form wire:submit.prevent="submit">
+        @csrf
         <input wire:model="supervision_id" type="hidden" value="{{ $supervision->id }}" name="supervision_id" >
         <label class="gap-4 grid grid-cols-1 sm:grid-cols-12 my-3">
             <div class="sm:col-span-4">
