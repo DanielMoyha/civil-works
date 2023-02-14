@@ -79,6 +79,7 @@
             </div>
 
             <livewire:works />
+
             {{-- <div>
                 @foreach ($works as $work)
                     <p>Nombre del trabajo: {{ $work->name }}</p>

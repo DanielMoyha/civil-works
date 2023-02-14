@@ -18,11 +18,6 @@
             </div>
 
             {{-- @livewire('create-followup', ['supervision_id' => $supervision->id]) --}}
-            @if (session('status') === 'followUp-created')
-                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)">
-                <div x-init="$notification({ text: 'Datos guardados exitosamente!', variant: 'success', position: 'right-top', duration: 2200 })"></div>
-                </p>
-            @endif
             @if (session('status') === 'followUp-error')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)">
                 <div x-init="$notification({ text: 'Ocurrió un error!', variant: 'error', position: 'right-top', duration: 2200 })"></div>

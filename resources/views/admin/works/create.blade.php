@@ -27,6 +27,7 @@
                                         <span> {{ __('Registrar Nueva Obra') }}</span>
                                     </h2>
                                     <div class="flex justify-center space-x-2">
+                                        <x-button></x-button>
                                         <a href="{{ route('admin.works.index') }}"
                                             class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-700 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-100 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90"
                                         >{{ __('Cancelar') }}</a>
@@ -40,19 +41,21 @@
                                 </div>
                                 <div class="tab-content p-4 sm:p-5">
                                     <div class="space-y-5">
-                                        <label class="block">
-                                            <span class="font-medium text-slate-600 dark:text-navy-100">Nombre del Trabajo</span>
-                                            <input
-                                                class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        <x-form.input>
+                                            hola
+                                            <x-slot:label>{{ __('Nombre del Trabajo') }}</x-slot:label>
+                                            <x-slot:input
                                                 placeholder="Escriba el nombre del trabajo"
                                                 type="text"
                                                 name="name"
                                                 value="{{ old('name') }}"
-                                            />
-                                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                                        </label>
+                                            ></x-slot:input>
+                                            <x-slot:error>
+                                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                                            </x-slot:error>
+                                        </x-form.input>
                                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                            <label class="block">
+                                            {{-- <label class="block">
                                                 <span class="font-medium text-slate-600 dark:text-navy-100">{{ __('Seleccione el tipo de trabajo') }}</span>
                                                 <select
                                                     class="mt-1.5 w-full"
@@ -66,9 +69,26 @@
                                                 @endforeach
                                                 </select>
                                                 <x-input-error :messages="$errors->get('type_work_id')" class="mt-2" />
-                                            </label>
-                                            <label class="block">
-                                                <span class="font-medium text-slate-600 dark:text-navy-100">{{ __('Seleccionar Encargado') }}</span>
+                                            </label> --}}
+                                            <x-form.select>
+                                                <x-slot:label>{{ __('Seleccione el tipo de trabajo') }}</x-slot:label>
+                                                <select
+                                                    class="mt-1.5 w-full"
+                                                    x-init="$el._x_tom = new Tom($el,pages.tomSelect)"
+                                                    placeholder="Seleccione el tipo..."
+                                                    name="type_work_id"
+                                                >
+                                                <option value>{{ __('Seleccione el tipo de trabajo') }}</option>
+                                                @foreach ($type_works as $type_work)
+                                                    <option value="{{ $type_work->id }}" {{ old('type_work_id') == $type_work->id ?  'selected' : '' }}>{{ $type_work->name }}</option>
+                                                @endforeach
+                                                </select>
+                                                <x-slot:error>
+                                                    <x-input-error :messages="$errors->get('type_work_id')" class="mt-2" />
+                                                </x-slot:error>
+                                            </x-form.select>
+                                            <x-form.select>
+                                                <x-slot:label>{{ __('Seleccione el tipo de trabajo') }}</x-slot:label>
                                                 <select
                                                     class="mt-1.5 w-full "
                                                     {{-- x-init="$el._x_tom = new Tom($el,pages.tomSelect)" --}}
@@ -85,129 +105,93 @@
                                                         @endif
                                                     @endforeach
                                                 </select>
-                                                <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
-                                            </label>
-                                            <label class="block">
-                                                <span class="font-medium text-slate-600 dark:text-navy-100">Nombre del Contratante</span>
-                                                <input
-                                                class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                                                placeholder="Escriba el nombre de la entidad contratante"
-                                                type="text"
-                                                name="name_contractor"
-                                                value="{{ old('name_contractor') }}"
-                                                />
-                                                <x-input-error :messages="$errors->get('name_contractor')" class="mt-2" />
-                                            </label>
-                                            <label class="block">
-                                                <span class="font-medium text-slate-600 dark:text-navy-100">Dirección del Contratante</span>
-                                                <input
-                                                class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                                                placeholder="Escriba el dirección de la entidad contratante"
-                                                type="text"
-                                                name="address_contractor"
-                                                value="{{ old('address_contractor') }}"
-                                                />
-                                                <x-input-error :messages="$errors->get('address_contractor')" class="mt-2" />
-                                            </label>
+                                                <x-slot:error>
+                                                    <x-input-error :messages="$errors->get('type_work_id')" class="mt-2" />
+                                                </x-slot:error>
+                                            </x-form.select>
+                                            <x-form.input>
+                                                <x-slot:label>{{ __('Nombre del Contratante') }}</x-slot:label>
+                                                <x-slot:input
+                                                    placeholder="Escriba el nombre de la entidad contratante"
+                                                    type="text"
+                                                    name="name_contractor"
+                                                    value="{{ old('name_contractor') }}"
+                                                ></x-slot:input>
+                                                <x-slot:error>
+                                                    <x-input-error :messages="$errors->get('name_contractor')" class="mt-2" />
+                                                </x-slot:error>
+                                            </x-form.input>
+                                            <x-form.input>
+                                                <x-slot:label>{{ __('Dirección del Contratante') }}</x-slot:label>
+                                                <x-slot:input
+                                                    placeholder="Escriba el dirección de la entidad contratante"
+                                                    type="text"
+                                                    name="address_contractor"
+                                                    value="{{ old('address_contractor') }}"
+                                                ></x-slot:input>
+                                                <x-slot:error>
+                                                    <x-input-error :messages="$errors->get('address_contractor')" class="mt-2" />
+                                                </x-slot:error>
+                                            </x-form.input>
                                         </div>
                                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                            <label class="block">
-                                                <span class="font-medium text-slate-600 dark:text-navy-100">Duración del Trabajo (meses)</span>
-                                                <input
-                                                class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                                                placeholder="Escriba la cantidad de meses"
-                                                type="number"
-                                                name="work_duration"
-                                                value="{{ old('work_duration') }}"
-                                                />
-                                                <x-input-error :messages="$errors->get('work_duration')" class="mt-2" />
-                                            </label>
-                                            <label class="block">
-                                                <span class="font-medium text-slate-600 dark:text-navy-100">Valor aproximado de los servicios en Bs.</span>
-                                                <input
-                                                class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                                                placeholder="Escriba el dirección de la entidad contratante"
-                                                type="text"
-                                                name="value_approximate_services"
-                                                value="{{ old('value_approximate_services') }}"
-                                                />
-                                                <x-input-error :messages="$errors->get('value_approximate_services')" class="mt-2" />
-                                            </label>
-                                            <label>
-                                                <span class="font-medium text-slate-600 dark:text-navy-100">Fecha de Inicio</span>
-                                                <span class="relative mt-1.5 flex">
-                                                    <input
-                                                        x-init="$el._x_flatpickr = flatpickr($el)"
-                                                        class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                                                        placeholder="Seleccione una fecha..."
-                                                        type="date"
-                                                        name="start_date"
-                                                        value="{{ old('start_date') }}"
-                                                    />
-                                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-5 w-5 transition-colors duration-200"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            stroke="currentColor"
-                                                            stroke-width="1.5"
-                                                        >
-                                                            <path
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                                            />
-                                                        </svg>
-                                                    </span>
-                                                </span>
-                                                <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
-                                            </label>
-                                            <label>
-                                                <span class="font-medium text-slate-600 dark:text-navy-100">Fecha de Conclusión (aprox.)</span>
-                                                <span class="relative mt-1.5 flex">
-                                                    <input
-                                                        x-init="$el._x_flatpickr = flatpickr($el, {minDate: 'today'})"
-                                                        class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                                                        placeholder="Seleccione una fecha..."
-                                                        type="date"
-                                                        name="completion_date"
-                                                        value="{{ old('completion_date') }}"
-                                                    />
-                                                    <span
-                                                        class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent"
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-5 w-5 transition-colors duration-200"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            stroke="currentColor"
-                                                            stroke-width="1.5"
-                                                        >
-                                                            <path
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                                            />
-                                                        </svg>
-                                                    </span>
-                                                </span>
-                                                <x-input-error :messages="$errors->get('completion_date')" class="mt-2" />
-                                            </label>
+                                            <x-form.input>
+                                                <x-slot:label>{{ __('Duración del Trabajo (meses)') }}</x-slot:label>
+                                                <x-slot:input
+                                                    placeholder="Digite la cantidad de meses"
+                                                    type="number"
+                                                    name="work_duration"
+                                                    value="{{ old('work_duration') }}"
+                                                ></x-slot:input>
+                                                <x-slot:error>
+                                                    <x-input-error :messages="$errors->get('work_duration')" class="mt-2" />
+                                                </x-slot:error>
+                                            </x-form.input>
+                                            <x-form.input>
+                                                <x-slot:label>{{ __('Valor aproximado de los servicios en Bs.') }}</x-slot:label>
+                                                <x-slot:input
+                                                    placeholder="Digite el valor aproximado"
+                                                    type="number"
+                                                    name="value_approximate_services"
+                                                    value="{{ old('value_approximate_services') }}"
+                                                ></x-slot:input>
+                                                <x-slot:error>
+                                                    <x-input-error :messages="$errors->get('value_approximate_services')" class="mt-2" />
+                                                </x-slot:error>
+                                            </x-form.input>
+                                            <x-form.input-date>
+                                                <x-slot:label>{{ __('Fecha de Inicio') }}</x-slot:label>
+                                                <x-slot:input
+                                                    x-init="$el._x_flatpickr = flatpickr($el, {minDate: 'today'})"
+                                                    name="start_date"
+                                                    value="{{ old('start_date') }}"
+                                                ></x-slot:input>
+                                                <x-slot:error>
+                                                    <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
+                                                </x-slot:error>
+                                            </x-form.input-date>
+                                            <x-form.input-date>
+                                                <x-slot:label>{{ __('Fecha de Conclusión (aprox.)') }}</x-slot:label>
+                                                <x-slot:input
+                                                    x-init="$el._x_flatpickr = flatpickr($el, {minDate: 'today'})"
+                                                    name="completion_date"
+                                                    value="{{ old('completion_date') }}"
+                                                ></x-slot:input>
+                                                <x-slot:error>
+                                                    <x-input-error :messages="$errors->get('completion_date')" class="mt-2" />
+                                                </x-slot:error>
+                                            </x-form.input-date>
                                         </div>
-                                        <div>
-                                            <span class="font-medium text-slate-600 dark:text-navy-100">Descripción del Proyecto</span>
-                                            <div class="mt-1.5 w-full">
-                                                <textarea
-                                                    rows="4"
-                                                    name="description"
-                                                    placeholder="Describa el proyecto..."
-                                                    class="form-textarea w-full rounded-lg border border-slate-300 bg-transparent p-2.5 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                                                    >{{ old('description') }}</textarea>
-                                                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
-                                            </div>
-                                        </div>
+                                        <x-form.textarea>
+                                            <x-slot:label>{{ __('Descripción del Proyecto') }}</x-slot:label>
+                                            <x-slot:textarea
+                                                name="description"
+                                                placeholder="Describa el proyecto..."
+                                            >{{ old('description') }}</x-slot:textarea>
+                                            <x-slot:error>
+                                                <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                                            </x-slot:error>
+                                        </x-form.textarea>
                                     </div>
                                 </div>
                             </div>

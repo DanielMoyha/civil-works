@@ -16,7 +16,7 @@ class Follow_up extends Model
         'image',
     ];
 
-    public function supervisions()
+    public function supervision()
     {
         return $this->belongsTo(Supervision::class);
     }
