@@ -111,7 +111,7 @@ class SupervisionController extends Controller
             ]);
             Storage::deleteDirectory('followUp/tmp/'.$tmp_file->folder);
             $tmp_file->delete();
-            return redirect()->back()->with('status', 'followUp-created');
+            return redirect()->route('supervision.followups')->with('status', 'followUp-created');
         }
         return redirect()->back()->with('status', 'followUp-error');
     }
@@ -139,6 +139,18 @@ class SupervisionController extends Controller
             Storage::deleteDirectory('followUp/tmp/'.$tmp_file->folder);
             $tmp_file->delete();
             return response('');
+        }
+    }
+
+    public function destroy(Follow_up $follow_up)
+    {
+        $follow_up = Follow_up::find($follow_up->id);
+        // dd($follow_up);
+        if($follow_up){
+            // Storage::delete($follow_up->image);
+            Storage::delete('followUp/'.$follow_up->image);
+            $follow_up->delete();
+            return redirect()->back()->with('status', 'followUp-deleted');
         }
     }
     /** END Role Supervision */

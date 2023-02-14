@@ -85,16 +85,15 @@
                             <td class="text-center px-4 py-3 sm:px-5">
                                 <div class="flex flex-wrap gap-2 py-1">
                                     @forelse ($supervision->follow_ups as $follow_up)
+                                    <a href="{{ Storage::url('followUp/'.$follow_up->image) }}" target="_blank">
+
                                         <img
-                                            class="aspect-square rounded-lg object-cover object-center h-20"
-                                            src="{{ Storage::url('followUp/'.$follow_up->image) }}"
-                                            {{-- src="https://images.unsplash.com/photo-1566766804468-f07b344cd2d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80" --}}
-                                            alt="a"
+                                        class="aspect-square rounded-lg object-cover object-center h-20"
+                                        src="{{ Storage::url('followUp/'.$follow_up->image) }}"
+                                        {{-- src="https://images.unsplash.com/photo-1566766804468-f07b344cd2d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80" --}}
+                                        alt="a" target="_blank"
                                         />
-                                        {{-- <img
-                                            class="aspect-square rounded-lg object-cover object-center"
-                                            src="{{ asset('storage/followUp/'.$follow_up->image.'/'.$follow_up->image->file_name.'.'.$follow_up->image->file_extension) }}" alt="{{ 'img_'.$follow_up->description }}"
-                                        /> --}}
+                                    </a>
                                     @empty
                                         <p class="font-bold text-xs italic opacity-40">{{ __('Sin seguimiento realizado...') }}</p>
                                     @endforelse

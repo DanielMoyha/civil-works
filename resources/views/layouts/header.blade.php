@@ -9,7 +9,9 @@
                 <button
                     class="menu-toggle ml-0.5 flex h-7 w-7 flex-col justify-center space-y-1.5 text-primary outline-none focus:outline-none dark:text-accent-light/80"
                     :class="$store.global.isSidebarExpanded && 'active'"
-                    @click="$store.global.isSidebarExpanded = !$store.global.isSidebarExpanded">
+                    @click="$store.global.isSidebarExpanded = !$store.global.isSidebarExpanded"
+                    aria-label="left-sidebar-toggle"
+                >
                     <span></span>
                     <span></span>
                     <span></span>
@@ -20,7 +22,8 @@
             <div class="-mr-1.5 flex items-center space-x-2">
                 <!-- Mobile Search Toggle -->
                 <button @click="$store.global.isSearchbarActive = !$store.global.isSearchbarActive"
-                    class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 sm:hidden">
+                    class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 sm:hidden"
+                    aria-label="search">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5.5 w-5.5 text-slate-500 dark:text-navy-100"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -373,7 +376,9 @@
 
                 <!-- Dark Mode Toggle -->
                 <button @click="$store.global.isDarkModeEnabled = !$store.global.isDarkModeEnabled"
-                    class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                    class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+                    aria-label="dark-light-mode"
+                >
                     <svg x-show="$store.global.isDarkModeEnabled"
                         x-transition:enter="transition-transform duration-200 ease-out absolute origin-top"
                         x-transition:enter-start="scale-75" x-transition:enter-end="scale-100 static"
@@ -392,7 +397,9 @@
                 </button>
                 <!-- Monochrome Mode Toggle -->
                 <button @click="$store.global.isMonochromeModeEnabled = !$store.global.isMonochromeModeEnabled"
-                    class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                    class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+                    aria-label="monochrome-mode"
+                >
                     <i
                         class="fa-solid fa-palette bg-gradient-to-r from-sky-400 to-blue-600 bg-clip-text text-lg font-semibold text-transparent"></i>
                 </button>
@@ -843,7 +850,9 @@
 
                 <!-- Right Sidebar Toggle -->
                 <button @click="$store.global.isRightSidebarExpanded = true"
-                    class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                    class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+                    aria-label="right-sidebar-toggle"
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5.5 w-5.5 text-slate-500 dark:text-navy-100"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
